@@ -9,20 +9,23 @@
   </div>
 
   <div id="expenses" class="min-w-full mt-4 rounded-lg">
-    <table class="min-w-full table-fixed border-collapse border border-slate-200 rounded-lg">
-      <thead class="bg-blue-600 text-white rounded-md text-left">
-        <tr class="rounded-md">
-          <th class="min-w-[150px] p-3 font-medium">Name</th>
-          <th class="min-w-[150px] p-3 font-medium">Date</th>
-          <th class="min-w-[150px] p-3 font-medium">Amount</th>
-          <th class="min-w-[150px] p-3 font-medium">Description</th>
-          <th class="min-w-[150px] p-3 font-medium">Edit</th>
-          <th class="min-w-[150px] p-3 font-medium">Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @expenses %>
-      </tbody>
-    </table>
+    <% @expenses_by_day.each do |day, expenses| %>
+      <h3 class="text-lg mt-2 mb-2 font-medium"> <%= day %> </h3>
+      <table class="min-w-full table-fixed border-collapse border border-slate-200 rounded-lg">
+        <thead class="bg-blue-600 text-white rounded-md text-left">
+          <tr class="rounded-md">
+            <th class="min-w-[150px] p-3 font-medium">Name</th>
+            <th class="min-w-[150px] p-3 font-medium">Date</th>
+            <th class="min-w-[150px] p-3 font-medium">Amount</th>
+            <th class="min-w-[150px] p-3 font-medium">Description</th>
+            <th class="min-w-[150px] p-3 font-medium">Edit</th>
+            <th class="min-w-[150px] p-3 font-medium">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%= render expenses %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
