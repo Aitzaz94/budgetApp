@@ -88,3 +88,5 @@ Congratulations! You've successfully navigated through the documentation for the
 Feel free to reach out for any questions, suggestions, or contributions. Happy budgeting and coding!
 
 🌐 #BudgetManagementApp #Documentation #RubyOnRails #FinancialEmpowerment #OpenSource
+
+https://medium.com/@aitzazakmal/building-a-budget-management-app-with-ruby-on-rails-tailwind-css-and-postgresql-28b1e3d69484
