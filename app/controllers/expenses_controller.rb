@@ -5,13 +5,30 @@ class ExpensesController < ApplicationController
   def index
     if params[:month]
       @expenses = Expense.where('extract(month from date) = ?', Date::MONTHNAMES.index(params[:month]))
+
+      first_day_of_month = Date.new(Date.today.year, Date::MONTHNAMES.index(params[:month]), 1)
+      last_day_of_month = first_day_of_month.end_of_month
+      @days_in_month = (first_day_of_month..last_day_of_month).map(&:day).to_a
+
+      @values_per_day = @days_in_month.map do |day|
+        @expenses.where('extract(day from date) = ?', day).sum(:amount)
+      end
+
+      # @days = Date.today.all_year.map{|date| date.strftime('%B').uniq}
     else
       @expenses = Expense.all
     end
 
     @months =  Date.today.all_year.map{ |date| date.strftime("%B")}.uniq
+    @expenses_by_month = @expenses.order(date: :asc).group_by{ |expense| expense.date.strftime("%Y-%m") }
 
-    @expenses_by_month = @expenses.group_by{ |expense| expense.date.strftime("%Y-%m") }
+    @monthly_expenses_sums = []
+    
+    @expenses_by_month.values.each do |monthly_expenses|
+      total_sum = monthly_expenses.sum{|expense| expense.amount}
+      @monthly_expenses_sums << total_sum
+    end
+
     @expenses_by_day = @expenses.order(date: :desc).group_by{ |expense| expense.date.strftime("%A, %d %B - %Y") }
   end
 
