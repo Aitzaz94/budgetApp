@@ -1,5 +1,6 @@
 <tr id="<%= dom_id expense %>">
   <td class="p-3"> <%= expense.name %> </td>
+  <td class="p-3"> <div class="rounded-lg py-1 ml-2 px-3 <%= tailwind_color(expense.category) %> inline-block font-medium"> <%= expense.category&.name %> </div> </td>
   <td class="p-3"> <%= expense.date %> </td>
   <td class="p-3"> <%= expense.amount %> PKR </td>
   <td class="p-3"> <%= expense.description %> </td>
